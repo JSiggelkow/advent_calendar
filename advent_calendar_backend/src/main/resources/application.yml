@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${spring.datasource.host:localhost}/TestDB
+    url: jdbc:postgresql://host.docker.internal:5432/TestDB
     username: postgres
     password: 123
   jpa:

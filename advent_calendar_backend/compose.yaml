@@ -5,19 +5,29 @@ services:
       context: .
     container_name: app
     depends_on:
-      - db
+      - postgres-0
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-      - SPRING_DATASOURCE_USERNAME=compose-postgres
-      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/TestDB
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=123
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
       - "8080:8080"
 
-  db:
-    image: 'postgres'
-    container_name: db
+  postgres-0:
+    image: postgres:alpine
+    container_name: postgres-0
     environment:
-      - POSTGRES_USER=compose-postgres
-      - POSTGRES_PASSWORD=compose-postgres
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: TestDB
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+
 
