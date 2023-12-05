@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: de.iks.advent_calendar_backend.AdventCalendarBackendApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.523 s -- in de.iks.advent_calendar_backend.AdventCalendarBackendApplicationTests
