@@ -1,4 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  min-height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font: 1.1rem/1.6rem 'Roboto', sans-serif;
+  color: #005477;
+  font-weight: 300;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
