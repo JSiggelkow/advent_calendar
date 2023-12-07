@@ -1,16 +1,15 @@
 #calendar-box {
   width: auto;
   height: 800px;
-  border: 1px solid black;
-  margin-left: 10%;
-  margin-right: 10%;
+  //border: 1px solid black;
+  margin: 0 10% 0 10%;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
 }
 
 #door-box {
-  border: 1px solid red;
+  //border: 1px solid #00bbff;
   height: 20%;
   width: 13%;
   margin: 1.5% 0.8% 1.5% 0.8% ;

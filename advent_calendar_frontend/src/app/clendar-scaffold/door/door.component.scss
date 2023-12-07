@@ -1,1 +1,24 @@
+#door-number {
+  color: orange;
+}
 
+#text-number {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-weight: 500;
+  font-size: 4vw;
+
+}
+
+
+
+#door-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/assets/images/IksTriangleBackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

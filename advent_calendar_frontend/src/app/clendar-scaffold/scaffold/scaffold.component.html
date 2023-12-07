@@ -1,3 +1,7 @@
 <div id="calendar-box">
-    <app-door *ngFor="let door of doors" id="door-box"></app-door>
+    <app-door
+      *ngFor="let door of doors"
+      id="door-box"
+      [doorNumber]="door"
+    ></app-door>
 </div>
