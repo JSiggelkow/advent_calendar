@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {HeaderComponent} from "./header/header/header.component";
 import {ScaffoldComponent} from "./clendar-scaffold/scaffold/scaffold.component";
-import {CountdownComponent} from "./header/countdown/countdown.component";
 
 @Component({
   selector: 'app-root',
