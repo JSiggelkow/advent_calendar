@@ -1,10 +1,9 @@
-<div id="door-container">
-  <div id="underlying-div"></div>
-  <div id="door-box" [@openClose]="isOpen ? 'open' : 'closed'" (click)="toggle()">
+<div id="door-container" [routerLink]="[doorNumber]">
+    <div id="underlying-div"></div>
+    <div id="door-box" [@openClose]="isOpen ? 'open' : 'closed'" (click)="toggle()">
     <span id="door-number">
       <p id="text-number">{{doorNumber}}</p>
     </span>
-  </div>
+    </div>
 </div>
-
 

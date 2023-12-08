@@ -1,10 +1,14 @@
 import {Component, Input} from '@angular/core';
 import {state, style, transition,animate, trigger} from '@angular/animations';
+import {Router, RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-door',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink,
+    RouterOutlet
+  ],
   templateUrl: './door.component.html',
   styleUrl: './door.component.scss',
   animations: [
@@ -30,9 +34,13 @@ export class DoorComponent {
   @Input() doorNumber: number | undefined;
   isOpen = false;
 
+  constructor(private router: Router) {
+  }
+
   toggle() {
     if (!this.isOpen) {
       this.isOpen = true;
+      this.router.navigate([this.doorNumber]);
     }
   }
 }
