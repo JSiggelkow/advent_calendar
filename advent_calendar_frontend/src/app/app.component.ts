@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {HeaderComponent} from "./header/header/header.component";
-import {ScaffoldComponent} from "./clendar-scaffold/scaffold/scaffold.component";
+import {ScaffoldComponent} from "./calendar-scaffold/scaffold/scaffold.component";
 
 @Component({
   selector: 'app-root',
