@@ -40,7 +40,10 @@ export class DoorComponent {
   toggle() {
     if (!this.isOpen) {
       this.isOpen = true;
-      this.router.navigate([this.doorNumber]);
+
+      setTimeout(() => {
+        this.router.navigate([this.doorNumber]);
+      }, 600);
     }
   }
 }
