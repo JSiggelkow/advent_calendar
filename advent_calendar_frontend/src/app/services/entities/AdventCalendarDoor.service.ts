@@ -1,4 +1,3 @@
-import {HttpClient} from "@angular/common/http";
 import {GenericCrudService} from "../http/GenericCrud.service";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";

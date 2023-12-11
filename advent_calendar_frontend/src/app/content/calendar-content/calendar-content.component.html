@@ -2,6 +2,10 @@
     <div class="background-overlay"></div>
 </div>
 <div class="popup-overlay">
-    <p>{{doorNumber}}</p>
+    <p>{{doorContent?.doorId}}</p>
+    <p>{{doorContent?.photoLink}}</p>
+    <p>{{doorContent?.text}}</p>
+    <p>{{doorContent?.videoLink}}</p>
+    <p>{{doorContent | json}}</p>
     <button class="close-button" (click)="closePopup()">Close</button>
 </div>
