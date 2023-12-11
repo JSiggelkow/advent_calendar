@@ -19,8 +19,6 @@ export class DoorContentService extends GenericCrudService<DoorContent>{
     return super.getById(apiUrl, id).pipe(
       catchError((error) => {
         if (error.status === 403) {
-          // Handle Forbidden error here
-          console.log('Forbidden Error:', error);
           return throwError(null);
         }
         return throwError(error);
