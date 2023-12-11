@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {DoorComponent} from "../door/door.component";
 import {NgForOf} from "@angular/common";
+import {AdventCalendarDoor, AdventCalendarDoorService} from "../../services/entities/AdventCalendarDoor.service";
 
 @Component({
   selector: 'app-scaffold',
@@ -10,17 +11,10 @@ import {NgForOf} from "@angular/common";
   styleUrl: './scaffold.component.scss'
 })
 export class ScaffoldComponent {
-  doors: number[] = [];
+  adventCalendarDoors: AdventCalendarDoor[] | undefined = [];
 
-  constructor() {
-    this.doors = this.shuffleArray(Array.from({ length: 24 }, (_, index) => index + 1));
-  }
-
-  private shuffleArray(array: number[]): number[] {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
+  constructor(private adventCalendar: AdventCalendarDoorService) {
+    this.adventCalendar.getAll('http://localhost:8080/api/calendar-doors')
+      .subscribe(data => this.adventCalendarDoors = data);
   }
 }
