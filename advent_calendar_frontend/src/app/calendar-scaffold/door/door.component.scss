@@ -33,4 +33,6 @@
 
 #door-container {
   position: relative;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease;
 }
