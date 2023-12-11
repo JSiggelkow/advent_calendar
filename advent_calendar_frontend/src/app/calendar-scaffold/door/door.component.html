@@ -1,4 +1,4 @@
-<div id="door-container">
+<div id="door-container"  [@shake]="shakeAnimationState">
     <div id="underlying-div"></div>
     <div id="door-box" [@openClose]="isOpen ? 'open' : 'closed'" (click)="toggle()">
     <span id="door-number">
