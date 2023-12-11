@@ -17,13 +17,21 @@ export class CalendarContentComponent implements OnInit {
   @Input() doorNumber = '';
   doorContent: DoorContent | undefined;
 
-  constructor(private router: Router, private doorContentService: DoorContentService) {}
+  constructor(private router: Router, private doorContentService: DoorContentService) {
+  }
 
   ngOnInit(): void {
     const doorNumberAsNumber = +this.doorNumber;
     if (!isNaN(doorNumberAsNumber) && doorNumberAsNumber > 0) {
       this.doorContentService.getById('http://localhost:8080/api/door-contents/validate', doorNumberAsNumber)
-        .subscribe(data => this.doorContent = data);
+        .subscribe(
+          data => this.doorContent = data,
+          error => {
+            if (error === null) {
+              this.router.navigate(['/forbidden']);
+            }
+          }
+        );
     }
   }
 
