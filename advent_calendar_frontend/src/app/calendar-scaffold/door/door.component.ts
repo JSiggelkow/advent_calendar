@@ -51,7 +51,7 @@ export class DoorComponent implements OnInit {
     }
   }
 
-  toggle() {
+  toggle(event: Event) {
     if (!this.isOpen && this.allowedToOpen) {
       this.isOpen = true;
 
@@ -59,11 +59,13 @@ export class DoorComponent implements OnInit {
         console.log(this.openDoorDate);
         this.router.navigate([this.doorNumber]);
       }, 600);
+    } else if (this.isOpen && this.allowedToOpen) {
+      console.log("Already open. Navigating to:", this.doorNumber);
+      this.router.navigate([this.doorNumber]);
     } else {
-      //start shake animation
       this.startShake();
     }
-    return true;
+    event.stopPropagation();
   }
 
   startShake() {
