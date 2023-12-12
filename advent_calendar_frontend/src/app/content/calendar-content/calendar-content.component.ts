@@ -43,7 +43,6 @@ export class CalendarContentComponent implements OnInit {
       (popupOverlay && popupOverlay.contains(event.target as Node)) ||
       (header && header.contains(event.target as Node))
     ) {
-      console.log(this.doorContent)
       return;
     }
 

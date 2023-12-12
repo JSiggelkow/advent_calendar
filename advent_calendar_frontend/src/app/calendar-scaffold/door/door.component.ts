@@ -56,11 +56,9 @@ export class DoorComponent implements OnInit {
       this.isOpen = true;
 
       setTimeout(() => {
-        console.log(this.openDoorDate);
         this.router.navigate([this.doorNumber]);
       }, 600);
     } else if (this.isOpen && this.allowedToOpen) {
-      console.log("Already open. Navigating to:", this.doorNumber);
       this.router.navigate([this.doorNumber]);
     } else {
       this.startShake();
