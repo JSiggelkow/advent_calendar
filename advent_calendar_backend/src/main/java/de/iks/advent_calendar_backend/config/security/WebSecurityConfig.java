@@ -18,9 +18,10 @@ public class WebSecurityConfig {
 			.cors(AbstractHttpConfigurer::disable)
 			.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.formLogin(AbstractHttpConfigurer::disable)
-			.securityMatcher("/api")
+			.securityMatcher("/api/**")
 			.authorizeHttpRequests( registry -> registry
 					.requestMatchers("/").permitAll()
+					.requestMatchers("/api/auth/login").permitAll()
 					.anyRequest().authenticated()
 			);
 
