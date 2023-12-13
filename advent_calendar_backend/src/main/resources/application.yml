@@ -13,3 +13,7 @@ spring:
     baseline-on-migrate: true
 server:
   port: 8080
+
+security:
+  jwt:
+    secret-key: 5eF8u9BdZ5Q8M3U1bYzI2jR7vXnA4sH9rD6wP1aZ3cV5yY8rE3eG7hT5fU1bY3c8
