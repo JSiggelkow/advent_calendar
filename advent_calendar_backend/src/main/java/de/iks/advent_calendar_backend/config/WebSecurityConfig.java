@@ -1,4 +1,4 @@
-package de.iks.advent_calendar_backend.config.security;
+package de.iks.advent_calendar_backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
