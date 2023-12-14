@@ -14,8 +14,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-	@Autowired
-	private UserRepo userRepo;
+
+	private final UserRepo userRepo;
+//	private final PasswordEncoder passwordEncoder;
 
 	public List<User> getAllUsers() {
 		return userRepo.findAll();
@@ -26,8 +27,8 @@ public class UserService {
 	}
 
 	public User createUser(User user) {
+		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 //		user.setPassword(passwordEncoder.encode(user.getPassword()));
-
 		return userRepo.save(user);
 	}
 

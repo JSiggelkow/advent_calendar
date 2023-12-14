@@ -5,6 +5,7 @@ import de.iks.advent_calendar_backend.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,23 +23,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
 	private final CustomUserDetailsService customUserDetailsService;
+
 	@Bean
 	public SecurityFilterChain applicationSecurity(HttpSecurity http) throws Exception {
 		http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
 		http
-			.csrf(AbstractHttpConfigurer::disable)
-			.cors(AbstractHttpConfigurer::disable)
-			.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.formLogin(AbstractHttpConfigurer::disable)
-			.securityMatcher("/**")
-			.authorizeHttpRequests( registry -> registry
-					.requestMatchers("/").permitAll()
-					.requestMatchers("/api/users").permitAll()
-					.requestMatchers("/api/users/").permitAll()
-					.requestMatchers("/api/auth/login").permitAll()
-					.anyRequest().authenticated()
-			);
+				.csrf(AbstractHttpConfigurer::disable)
+				.cors(AbstractHttpConfigurer::disable)
+				.sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.formLogin(AbstractHttpConfigurer::disable)
+				.securityMatcher("/api/**")
+				.authorizeHttpRequests(registry -> registry
+						.requestMatchers("/api/auth/login").permitAll()
+						.anyRequest().authenticated()
+				);
 
 		return http.build();
 	}
