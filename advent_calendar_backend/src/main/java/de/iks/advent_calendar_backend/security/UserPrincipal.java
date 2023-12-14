@@ -1,18 +1,23 @@
 package de.iks.advent_calendar_backend.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+
 @Getter
 @Builder
 public class UserPrincipal implements UserDetails {
 
 	private final Long userId;
 	private final String username;
-	private final Collection<? extends GrantedAuthority> authorities;
+	@JsonIgnore
+	private final String password;
+	private final List<? extends GrantedAuthority> authorities;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -20,7 +25,7 @@ public class UserPrincipal implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return null;
+		return password;
 	}
 
 	@Override
