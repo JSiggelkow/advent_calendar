@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/advent_calendar
-    username: postgres
-    password: 123
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,4 +16,4 @@ server:
 
 security:
   jwt:
-    secret-key: 5eF8u9BdZ5Q8M3U1bYzI2jR7vXnA4sH9rD6wP1aZ3cV5yY8rE3eG7hT5fU1bY3c8
+    secret-key: ${JWT_KEY}
