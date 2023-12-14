@@ -1,5 +1,6 @@
 package de.iks.advent_calendar_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int user_id;
+	private Long user_id;
 	@Column
 	private String username;
 	@Column
