@@ -6,9 +6,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
   flyway:
     baseline-on-migrate: true
 server:
@@ -17,3 +14,7 @@ server:
 security:
   jwt:
     secret-key: ${JWT_KEY}
+
+logging:
+  level:
+    org.springframework.web: TRACE
