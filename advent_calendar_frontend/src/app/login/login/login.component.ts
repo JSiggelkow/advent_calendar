@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {AuthService} from "../../services/http/auth.service";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {LoginService} from "../../services/entities/Login.service";
 
 @Component({
   selector: 'app-login',
@@ -13,18 +13,19 @@ import {FormsModule} from "@angular/forms";
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  apiUrl: string = "http://localhost:8080/api/auth/login";
 
-  constructor(private authService: AuthService) {}
+  constructor(private loginService: LoginService) {}
 
   onLogin(): void {
-    this.authService.login(this.username, this.password).subscribe(
-      (response) => {
-        console.log('Erfolgreich eingeloggt!', response);
-
-      },
-      (error) => {
-        console.error('Fehler beim Login:', error);
+    this.loginService.create(this.apiUrl, {username: this.username, password: this.password}).subscribe(
+      x => {
+        if (x.accessToken) {
+          sessionStorage.setItem("JWT", x.accessToken);
+        } else {
+          console.log("login failed")
+        }
       }
-    );
+    )
   }
 }
