@@ -2,6 +2,7 @@ package de.iks.advent_calendar_backend.rest.controller;
 
 import de.iks.advent_calendar_backend.model.LoginRequest;
 import de.iks.advent_calendar_backend.model.LoginResponse;
+import de.iks.advent_calendar_backend.rest.service.AuthService;
 import de.iks.advent_calendar_backend.security.JwtIssuer;
 import de.iks.advent_calendar_backend.security.UserPrincipal;
 import de.iks.advent_calendar_backend.security.UserPrincipalAuthenticationToken;
@@ -22,25 +23,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthController {
 
-	private final JwtIssuer jwtIssuer;
-	private final AuthenticationManager authenticationManager;
+	private final AuthService authService;
 
 	@PostMapping(value = "/login")
 	public LoginResponse login(@RequestBody @Validated LoginRequest request) {
-		var authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-		);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		var principal = (UserPrincipal) authentication.getPrincipal();
-
-		var roles = principal.getAuthorities().stream()
-				.map(GrantedAuthority::getAuthority)
-				.toList();
-
-		var token = jwtIssuer.issue(principal.getUserId(), principal.getUsername(), roles);
-		return  LoginResponse.builder()
-				.accessToken(token)
-				.build();
+		return authService.attemptLogin(request.getUsername(),request.getPassword());
 	}
 
 	@GetMapping("/secured")
