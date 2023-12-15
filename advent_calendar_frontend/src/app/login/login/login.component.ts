@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {LoginService} from "../../services/entities/Login.service";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 
@@ -21,13 +20,15 @@ export class LoginComponent implements OnInit{
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.auth.isLoggedIn$.subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn;
-    })
   }
 
   onLogin(): void {
     this.auth.login({username: this.username, password: this.password});
-    this.router.navigate(["advent-calendar"]);
+    this.auth.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+      if (this.isLoggedIn) {
+        this.router.navigate(["advent-calendar"]);
+      }
+    })
   }
 }
