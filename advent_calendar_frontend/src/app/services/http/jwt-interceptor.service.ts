@@ -12,8 +12,6 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = sessionStorage.getItem('JWT');
     if (token) {
-      console.log("kaka");
-      console.log(token);
       const authRequest = request.clone({
         headers: request.headers.set('Authorization', `Bearer ${token}`)
       });

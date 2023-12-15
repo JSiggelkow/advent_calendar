@@ -37,7 +37,7 @@ import {Router, RouterLink, RouterOutlet} from "@angular/router";
 })
 export class DoorComponent implements OnInit {
   @Input() doorNumber: number | undefined;
-  @Input() openDoorDate: String | undefined;
+  @Input() openDoorDate: string | undefined;
   isOpen = false;
   allowedToOpen = false;
   shakeAnimationState = 'start';
@@ -47,11 +47,12 @@ export class DoorComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.openDoorDate != null) {
-      this.allowedToOpen = Date.now() >= +this.openDoorDate;
+      this.allowedToOpen = Date.now() >= new Date(this.openDoorDate).getTime();
     }
   }
 
   toggle(event: Event) {
+
     if (!this.isOpen && this.allowedToOpen) {
       this.isOpen = true;
 
