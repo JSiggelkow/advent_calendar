@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {LoginService} from "../../services/entities/Login.service";
 import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit{
   isLoggedIn: boolean = false;
 
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.auth.isLoggedIn$.subscribe(loggedIn => {
@@ -27,5 +28,6 @@ export class LoginComponent implements OnInit{
 
   onLogin(): void {
     this.auth.login({username: this.username, password: this.password});
+    this.router.navigate(["advent-calendar"]);
   }
 }
