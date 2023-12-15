@@ -31,8 +31,7 @@ public class AuthController {
 	}
 
 	@GetMapping("/secured")
-	public String secured(@AuthenticationPrincipal UserPrincipal principal) {
-		return "If you see this, then you're logged in as user: " + principal.getUsername()
-				+ " User ID: " + principal.getUserId();
+	public void secured(@AuthenticationPrincipal UserPrincipal principal) {
+
 	}
 }
