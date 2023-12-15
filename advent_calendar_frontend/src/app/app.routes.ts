@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: "",
     redirectTo: "advent-calendar",
-    pathMatch: "full",
+    pathMatch: "full"
   },
   {
     path: 'login',
@@ -18,15 +18,17 @@ export const routes: Routes = [
   {
     path: 'advent-calendar',
     component: ScaffoldComponent,
-    canActivate: [loginGuard]
+    canActivate: [loginGuard],
+    children: [
+      {
+        path: ':doorNumber',
+        component: CalendarContentComponent,
+        canActivate: [loginGuard]
+      }
+    ]
   },
   {
     path: 'forbidden',
     component: DoorAccessForbiddenComponent
-  },
-  {
-    path: ':doorNumber',
-    component: CalendarContentComponent,
-    canActivate: [loginGuard]
   },
 ];

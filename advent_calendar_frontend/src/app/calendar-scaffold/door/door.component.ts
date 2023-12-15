@@ -50,17 +50,15 @@ export class DoorComponent implements OnInit {
       this.allowedToOpen = Date.now() >= new Date(this.openDoorDate).getTime();
     }
   }
-
   toggle(event: Event) {
-
     if (!this.isOpen && this.allowedToOpen) {
       this.isOpen = true;
 
       setTimeout(() => {
-        this.router.navigate([this.doorNumber]);
+        this.router.navigate(['advent-calendar', this.doorNumber]);
       }, 600);
     } else if (this.isOpen && this.allowedToOpen) {
-      this.router.navigate([this.doorNumber]);
+      this.router.navigate(['advent-calendar', this.doorNumber]);
     } else {
       this.startShake();
     }

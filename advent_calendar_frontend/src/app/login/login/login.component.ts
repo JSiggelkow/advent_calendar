@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit{
       this.isLoggedIn = isLoggedIn;
       if (this.isLoggedIn) {
         this.router.navigate(["advent-calendar"]);
-        console.log("lol")
       }
     })
   }
