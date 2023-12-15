@@ -34,13 +34,19 @@ export class AuthService {
   }
 
   isLoggedIn(): void {
-    this.http.get(this.apiUrlSecured).subscribe(response => {
-      console.log("is logged in")
-      this.isLoggedInSubject.next(true);
-    }, error => {
-      console.log("not logged in")
-      this.isLoggedInSubject.next(false);
-    })
+    this.http.get(this.apiUrlSecured).subscribe(
+      response => {
+        console.log("is logged in");
+        this.isLoggedInSubject.next(true);
+        sessionStorage.setItem('loggedIn', 'true');
+      },
+      error => {
+        console.log("not logged in");
+        this.isLoggedInSubject.next(false);
+        sessionStorage.setItem('loggedIn', 'false');
+      }
+    );
   }
+
 
 }

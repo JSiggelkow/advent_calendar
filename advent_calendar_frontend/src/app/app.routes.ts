@@ -7,8 +7,9 @@ import {loginGuard} from "./guards/login.guard";
 
 export const routes: Routes = [
   {
-    path: '',
-    component: LoginComponent
+    path: "",
+    redirectTo: "advent-calendar",
+    pathMatch: "full",
   },
   {
     path: 'login',
