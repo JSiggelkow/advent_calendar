@@ -6,6 +6,7 @@ import de.iks.advent_calendar_backend.rest.service.AuthService;
 import de.iks.advent_calendar_backend.security.JwtIssuer;
 import de.iks.advent_calendar_backend.security.UserPrincipal;
 import de.iks.advent_calendar_backend.security.UserPrincipalAuthenticationToken;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,8 +27,8 @@ public class AuthController {
 	private final AuthService authService;
 
 	@PostMapping(value = "/login")
-	public LoginResponse login(@RequestBody @Validated LoginRequest request) {
-		return authService.attemptLogin(request.getUsername(),request.getPassword());
+	public void login(HttpServletResponse response, @RequestBody @Validated LoginRequest request) {
+		authService.attemptLogin(response, request.getUsername(),request.getPassword());
 	}
 
 	@GetMapping("/secured")

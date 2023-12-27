@@ -3,7 +3,11 @@ package de.iks.advent_calendar_backend.rest.service;
 import de.iks.advent_calendar_backend.model.LoginResponse;
 import de.iks.advent_calendar_backend.security.JwtIssuer;
 import de.iks.advent_calendar_backend.security.UserPrincipal;
+import io.micrometer.observation.transport.ResponseContext;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +20,7 @@ public class AuthService {
 	private final JwtIssuer jwtIssuer;
 	private final AuthenticationManager authenticationManager;
 
-	public LoginResponse attemptLogin(String username, String password) {
+	public void attemptLogin(HttpServletResponse response, String username, String password) {
 		var authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(username, password)
 		);
@@ -28,8 +32,9 @@ public class AuthService {
 				.toList();
 
 		var token = jwtIssuer.issue(principal.getUserId(), principal.getUsername(), roles);
-		return LoginResponse.builder()
-				.accessToken(token)
-				.build();
+
+		Cookie cookie = new Cookie("JWT", token);
+		cookie.setPath("/");
+		response.addCookie(cookie);
 	}
 }
