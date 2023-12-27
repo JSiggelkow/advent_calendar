@@ -1,10 +1,7 @@
 package de.iks.advent_calendar_backend.rest.service;
 
-import de.iks.advent_calendar_backend.model.LoginResponse;
 import de.iks.advent_calendar_backend.security.JwtIssuer;
 import de.iks.advent_calendar_backend.security.UserPrincipal;
-import io.micrometer.observation.transport.ResponseContext;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
