@@ -6,9 +6,6 @@ import {audit} from "rxjs";
 
 export const loginGuard: CanActivateFn = (route, state) => {
 
-  console.log(route.toString())
-  console.log(state.toString())
-
   const router = inject(Router);
 
 
