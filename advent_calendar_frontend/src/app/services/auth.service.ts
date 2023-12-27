@@ -10,6 +10,7 @@ export class AuthService {
 
   private apiUrlLogin: string = "http://localhost:8080/api/auth/login";
   private apiUrlSecured: string = "http://localhost:8080/api/auth/secured";
+  private apiUrlLogout: string = "http://localhost:8080/api/auth/logout";
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
@@ -31,14 +32,11 @@ export class AuthService {
   }
 
   logout() {
-    this.isLoggedIn();
-    this.isLoggedIn$.subscribe(loggedIn => {
-      if (loggedIn) {
-
+    this.http.post(this.apiUrlLogout, null, {withCredentials: true}).subscribe(
+      response => {
+        this.isLoggedIn();
       }
-    });
-    this.isLoggedIn();
-
+    )
 
   }
 
