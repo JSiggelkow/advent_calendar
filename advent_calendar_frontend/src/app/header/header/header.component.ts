@@ -21,7 +21,10 @@ export class HeaderComponent {
   constructor(private auth: AuthService) {
     this.auth.isLoggedIn$.subscribe(x => {
       this.isLoggedIn = x;
-    })
+    });
+    if (sessionStorage.getItem("loggedIn") == "true") {
+      this.isLoggedIn = true;
+    }
   }
 
 
