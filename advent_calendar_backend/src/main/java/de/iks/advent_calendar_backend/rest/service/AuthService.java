@@ -2,6 +2,7 @@ package de.iks.advent_calendar_backend.rest.service;
 
 import de.iks.advent_calendar_backend.security.JwtIssuer;
 import de.iks.advent_calendar_backend.security.UserPrincipal;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -37,6 +38,16 @@ public class AuthService {
 			.path("/")
 			.maxAge(60)
 			.build();
+		response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+	}
+
+	public void attemptLogout(HttpServletResponse response) {
+		ResponseCookie cookie = ResponseCookie.from("accessToken", null)
+				.httpOnly(true)
+				.sameSite("Lax")
+				.path("/")
+				.maxAge(0)
+				.build();
 		response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 	}
 }

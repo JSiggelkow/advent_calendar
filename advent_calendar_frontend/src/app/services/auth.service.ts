@@ -33,8 +33,8 @@ export class AuthService {
   logout() {
     this.isLoggedIn();
     this.isLoggedIn$.subscribe(loggedIn => {
-      console.log(loggedIn)
       if (loggedIn) {
+
       }
     });
     this.isLoggedIn();

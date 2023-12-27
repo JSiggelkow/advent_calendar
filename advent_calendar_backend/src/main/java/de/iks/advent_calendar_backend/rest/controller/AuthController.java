@@ -31,8 +31,12 @@ public class AuthController {
 		authService.attemptLogin(response, request.getUsername(),request.getPassword());
 	}
 
+	@PostMapping("/logout")
+	public void logout(HttpServletResponse response) {
+		authService.attemptLogout(response);
+	}
+
 	@GetMapping("/secured")
 	public void secured(@AuthenticationPrincipal UserPrincipal principal) {
-
 	}
 }
