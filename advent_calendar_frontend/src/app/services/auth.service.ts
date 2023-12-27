@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, tap} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {LoginService} from "./entities/Login.service";
 
@@ -31,6 +31,19 @@ export class AuthService {
         this.isLoggedInSubject.next(false);
       }
     )
+  }
+
+  logout() {
+    this.isLoggedIn();
+    this.isLoggedIn$.subscribe( loggedIn => {
+      console.log(loggedIn)
+      if (loggedIn) {
+        sessionStorage.removeItem("JWT");
+      }
+    });
+    this.isLoggedIn();
+
+
   }
 
   isLoggedIn(): void {

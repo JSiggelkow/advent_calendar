@@ -1,23 +1,12 @@
 <header>
   <div id="header-div">
-    <img src="assets/images/IKSAdventskalenderLogo.png" id="header-logo" alt="Iks Advent Calendar Logo">
+    <img ngSrc="assets/images/IKSAdventskalenderLogo.png" id="header-logo" alt="Iks Advent Calendar Logo" height="155"
+         width="201">
     <div id="header-spacer"></div>
     <nav>
       <ul class="navbar-list">
-        <li *ngIf="!isLoggedIn">
-          <a href="#">login</a>
-        </li>
-        <li *ngIf="isLoggedIn">
-          <a href="#">logout</a>
-        </li>
-        <li>
-          <a href="#">share</a>
-        </li>
-        <li>
-          <a href="#">about</a>
-        </li>
-        <li>
-          <a href="#">settings</a>
+        <li *ngIf="isLoggedIn" (click)="logout()">
+          <a href="/login">logout</a>
         </li>
       </ul>
     </nav>

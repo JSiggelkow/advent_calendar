@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
-import {NgIf} from "@angular/common";
+import {NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
     RouterLink,
-    NgIf
+    NgIf,
+    NgOptimizedImage
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -17,9 +18,13 @@ export class HeaderComponent {
 
   isLoggedIn: boolean = false;
 
-  constructor(auth: AuthService) {
+  constructor(private auth: AuthService) {
     auth.isLoggedIn$.subscribe(x => {
       this.isLoggedIn = x;
     })
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }
