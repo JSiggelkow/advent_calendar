@@ -6,10 +6,11 @@ import {audit} from "rxjs";
 
 export const loginGuard: CanActivateFn = (route, state) => {
 
-  const auth = inject(AuthService);
+  console.log(route.toString())
+  console.log(state.toString())
+
   const router = inject(Router);
 
-  auth.isLoggedIn();
 
   let isLoggedIn = sessionStorage.getItem("loggedIn")
 
@@ -19,6 +20,4 @@ export const loginGuard: CanActivateFn = (route, state) => {
     router.navigate(["/login"]);
     return false;
   }
-
-
 };

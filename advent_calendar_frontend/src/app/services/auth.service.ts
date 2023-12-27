@@ -20,12 +20,11 @@ export class AuthService {
   login(credentials: { username: string; password: string }) {
     this.loginService.create(this.apiUrlLogin, credentials).subscribe(
       x => {
+        sessionStorage.setItem("loggedIn", "true");
         this.isLoggedInSubject.next(true);
-        console.log("logged in")
-
       },
       error => {
-        console.log("login failed")
+        sessionStorage.setItem("loggedIn", "false");
         this.isLoggedInSubject.next(false);
       }
     )
@@ -34,26 +33,13 @@ export class AuthService {
   logout() {
     this.http.post(this.apiUrlLogout, null, {withCredentials: true}).subscribe(
       response => {
-        this.isLoggedIn();
+        sessionStorage.setItem("loggedIn", "false");
+        this.isLoggedInSubject.next(false);
       }
     )
 
   }
 
-  isLoggedIn(): void {
-    this.http.get(this.apiUrlSecured, {withCredentials: true}).subscribe(
-      response => {
-        console.log("is logged in");
-        this.isLoggedInSubject.next(true);
-        sessionStorage.setItem('loggedIn', 'true');
-      },
-      error => {
-        console.log("not logged in");
-        this.isLoggedInSubject.next(false);
-        sessionStorage.setItem('loggedIn', 'false');
-      }
-    );
-  }
 
 
 }
