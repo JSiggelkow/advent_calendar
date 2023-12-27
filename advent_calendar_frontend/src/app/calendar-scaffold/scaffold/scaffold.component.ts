@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import {DoorComponent} from "../door/door.component";
 import {NgForOf} from "@angular/common";
 import {AdventCalendarDoor, AdventCalendarDoorService} from "../../services/entities/AdventCalendarDoor.service";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-scaffold',
   standalone: true,
-  imports: [DoorComponent, NgForOf],
+  imports: [DoorComponent, NgForOf, RouterOutlet],
   templateUrl: './scaffold.component.html',
   styleUrl: './scaffold.component.scss'
 })

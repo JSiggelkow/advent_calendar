@@ -21,7 +21,7 @@ public class UserController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable int id) {
+	public ResponseEntity<User> getUserById(@PathVariable Long id) {
 		User user = userService.getUserById(id);
 		return ResponseEntity.ok(user);
 	}
@@ -33,8 +33,8 @@ public class UserController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+	public ResponseEntity<Void> deleteUser(@PathVariable(name = "id") Long id) {
 		userService.deleteUser(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

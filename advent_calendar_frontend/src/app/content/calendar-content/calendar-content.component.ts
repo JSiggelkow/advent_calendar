@@ -1,7 +1,7 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {DoorContent, DoorContentService} from "../../services/entities/DoorContent.service";
-import {JsonPipe} from "@angular/common";
+import {JsonPipe, Location} from "@angular/common";
 
 
 @Component({
@@ -17,7 +17,7 @@ export class CalendarContentComponent implements OnInit {
   @Input() doorNumber = '';
   doorContent: DoorContent | undefined;
 
-  constructor(private router: Router, private doorContentService: DoorContentService) {
+  constructor(private router: Router, private doorContentService: DoorContentService, private location: Location) {
   }
 
   ngOnInit(): void {
@@ -46,10 +46,10 @@ export class CalendarContentComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/']);
+    this.location.back();
   }
 
   closePopup() {
-    this.router.navigate(['/'])
+    this.location.back();
   }
 }
