@@ -2,6 +2,7 @@ package de.iks.advent_calendar_backend.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +30,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	}
 
 	private Optional<String> extractTokenFromRequest(HttpServletRequest request) {
-		var token = request.getHeader("Authorization");
-		if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
-			return Optional.of(token.substring(7));
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if ("accessToken".equals(cookie.getName())) { // Adjust the cookie name as needed
+					return Optional.of(cookie.getValue());
+				}
+			}
 		}
 		return Optional.empty();
 	}

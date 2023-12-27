@@ -7,6 +7,7 @@ import io.micrometer.observation.transport.ResponseContext;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,8 +34,12 @@ public class AuthService {
 
 		var token = jwtIssuer.issue(principal.getUserId(), principal.getUsername(), roles);
 
-		Cookie cookie = new Cookie("JWT", token);
-		cookie.setPath("/");
-		response.addCookie(cookie);
+		ResponseCookie cookie = ResponseCookie.from("accessToken", token)
+			.httpOnly(true)
+			.secure(false)
+			.path("/")
+			.maxAge(60)
+			.build();
+		response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 	}
 }
