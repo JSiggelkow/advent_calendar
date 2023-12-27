@@ -97,7 +97,8 @@ public class WebSecurityConfig {
 						.allowedHeaders(
 								HttpHeaders.CONTENT_TYPE,
 								HttpHeaders.AUTHORIZATION
-						);
+						)
+						.allowCredentials(true);
 			}
 		};
 	}

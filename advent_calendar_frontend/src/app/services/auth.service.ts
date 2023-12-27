@@ -19,12 +19,9 @@ export class AuthService {
   login(credentials: { username: string; password: string }) {
     this.loginService.create(this.apiUrlLogin, credentials).subscribe(
       x => {
-        if (x.accessToken) {
-          sessionStorage.setItem("JWT", x.accessToken);
-          this.isLoggedInSubject.next(true);
-        } else {
-          console.log("login failed")
-        }
+        this.isLoggedInSubject.next(true);
+        console.log("logged in")
+
       },
       error => {
         console.log("login failed")
@@ -35,10 +32,9 @@ export class AuthService {
 
   logout() {
     this.isLoggedIn();
-    this.isLoggedIn$.subscribe( loggedIn => {
+    this.isLoggedIn$.subscribe(loggedIn => {
       console.log(loggedIn)
       if (loggedIn) {
-        sessionStorage.removeItem("JWT");
       }
     });
     this.isLoggedIn();
@@ -47,7 +43,7 @@ export class AuthService {
   }
 
   isLoggedIn(): void {
-    this.http.get(this.apiUrlSecured).subscribe(
+    this.http.get(this.apiUrlSecured, {withCredentials: true}).subscribe(
       response => {
         console.log("is logged in");
         this.isLoggedInSubject.next(true);
