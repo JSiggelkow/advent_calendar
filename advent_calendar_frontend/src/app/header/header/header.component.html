@@ -4,8 +4,11 @@
     <div id="header-spacer"></div>
     <nav>
       <ul class="navbar-list">
-        <li>
+        <li *ngIf="!isLoggedIn">
           <a href="#">login</a>
+        </li>
+        <li *ngIf="isLoggedIn">
+          <a href="#">logout</a>
         </li>
         <li>
           <a href="#">share</a>

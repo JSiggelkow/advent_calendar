@@ -8,22 +8,7 @@ export const loginGuard: CanActivateFn = (route, state) => {
 
   const auth = inject(AuthService);
   const router = inject(Router);
-  //
-  // auth.isLoggedIn();
-  // let isLoggedIn;
-  //
-  // auth.isLoggedIn$.subscribe(x => {
-  //   isLoggedIn = x;
-  //   console.log(isLoggedIn);
-  // })
-  //
-  //
-  // if (isLoggedIn){
-  //   return true;
-  // }
-  //
-  // router.navigate(["login"]);
-  // return false;
+
   auth.isLoggedIn();
 
   let isLoggedIn = sessionStorage.getItem("loggedIn")
