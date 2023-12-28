@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   username: string = '';
   password: string = '';
   isLoggedIn: boolean = false;
+  loginError: boolean = false;
 
 
   constructor(private auth: AuthService, private router: Router) {
@@ -41,7 +42,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.auth.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
       if (this.isLoggedIn) {
+        this.loginError = false;
         this.router.navigate(["advent-calendar"]);
+      } else {
+        this.loginError = true;
       }
     })
   }

@@ -7,6 +7,9 @@
     <label for="password">Passwort:</label>
     <input type="password" id="password" [(ngModel)]="password" name="password" required>
 
-    <button type="submit" id="loginButton" [ngClass]="{ 'btn-enabled': username && password, 'btn-disabled': !username || !password }">Login</button>
+    <button type="submit" id="loginButton"
+            [ngClass]="{ 'btn-enabled': username && password, 'btn-disabled': !username || !password }">Login
+    </button>
+    <p *ngIf="loginError" id="errorText">Wrong Username/Password</p>
   </form>
 </div>
