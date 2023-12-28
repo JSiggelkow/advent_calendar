@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {LoginService} from "./entities/Login.service";
+import {errorContext} from "rxjs/internal/util/errorContext";
+import {ErrorHandlingService} from "./http/errorHandling.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class AuthService {
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  constructor(private http: HttpClient, private loginService: LoginService) {
+  constructor(private http: HttpClient, private loginService: LoginService, private errorHandling: ErrorHandlingService) {
   }
 
   login(credentials: { username: string; password: string }) {
@@ -26,8 +28,11 @@ export class AuthService {
       error => {
         sessionStorage.setItem("loggedIn", "false");
         this.isLoggedInSubject.next(false);
+        if (error.status === 403) {
+          this.errorHandling.publishErrorCode(error.status);
+        }
       }
-    )
+    );
   }
 
   logout() {
