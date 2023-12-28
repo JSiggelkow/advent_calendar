@@ -27,7 +27,7 @@ input {
   border-radius: 4px;
 }
 
-button {
+button.btn-enabled {
   padding: 10px;
   background-color: #4caf50;
   color: #fff;
@@ -36,6 +36,15 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button.btn-disabled {
+  padding: 10px;
+  background-color: #ff5c5c; /* Rote Farbe für deaktivierten Button */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: not-allowed;
+}
+
+button.btn-enabled:hover {
   background-color: #45a049;
 }

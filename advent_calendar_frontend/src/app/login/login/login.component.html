@@ -7,6 +7,6 @@
     <label for="password">Passwort:</label>
     <input type="password" id="password" [(ngModel)]="password" name="password" required>
 
-    <button type="submit" [disabled]="!username || !password">Login</button>
+    <button type="submit" [ngClass]="{ 'btn-enabled': username && password, 'btn-disabled': !username || !password }">Login</button>
   </form>
 </div>
