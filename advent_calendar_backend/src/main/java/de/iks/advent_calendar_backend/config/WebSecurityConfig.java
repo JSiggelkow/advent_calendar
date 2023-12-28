@@ -44,8 +44,9 @@ public class WebSecurityConfig {
 				.securityMatcher("/api/**")
 				.authorizeHttpRequests(registry -> registry
 						.requestMatchers("/api/auth/login").permitAll()
+						.requestMatchers("/api/auth/logout").permitAll()
 						.requestMatchers(HttpMethod.POST,"/api/**").hasRole("ADMIN")
-						.requestMatchers(HttpMethod.GET,"/api/**").hasAnyRole("USER","ADMIN")
+						.requestMatchers(HttpMethod.GET,"/api/**").hasAnyRole("CONSUMER","ADMIN")
 						.requestMatchers(HttpMethod.PUT,"/api/**").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.DELETE,"/api/**").hasRole("ADMIN")
 						.anyRequest().authenticated()
