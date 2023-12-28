@@ -4,6 +4,7 @@ import {DoorAccessForbiddenComponent} from "./content/door-access-forbidden/door
 import {LoginComponent} from "./login/login/login.component";
 import {ScaffoldComponent} from "./calendar-scaffold/scaffold/scaffold.component";
 import {loginGuard} from "./guards/login.guard";
+import {RegisterComponent} from "./login/register/register.component";
 
 export const routes: Routes = [
   {
@@ -14,6 +15,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'advent-calendar',

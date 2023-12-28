@@ -55,4 +55,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
+  onNavigateToRegister() {
+    this.router.navigate(["register"]).then();
+  }
 }
