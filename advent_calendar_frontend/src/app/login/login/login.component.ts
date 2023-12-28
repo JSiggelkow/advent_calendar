@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.auth.logout();
+    if (sessionStorage.getItem("loggedIn") == "true") {
+      this.auth.logout();
+    }
   }
 
   onLogin(): void {
