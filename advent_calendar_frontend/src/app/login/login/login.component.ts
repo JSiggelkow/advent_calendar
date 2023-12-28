@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.auth.logout();
   }
 
   onLogin(): void {
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.auth.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
       if (this.isLoggedIn) {
-        this.router.navigate(["advent-calendar"]);
+        this.router.navigate(["advent-calendar"]).then();
       }
     });
     this.errorHandling.errorCode$.subscribe(errorStatus => {
