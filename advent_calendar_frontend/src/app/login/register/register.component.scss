@@ -5,29 +5,19 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-}
-
-form {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
-label {
-  margin-bottom: 8px;
+mat-form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-input {
-  padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button:enabled {
+.submitButton:enabled {
   padding: 10px;
   background-color: #007bff;
   color: #fff;
@@ -36,7 +26,7 @@ button:enabled {
   cursor: pointer;
 }
 
-button:disabled {
+.submitButton:disabled {
   padding: 10px;
   background-color: #b2b2b2;
   color: #000000;
@@ -45,18 +35,11 @@ button:disabled {
   cursor: not-allowed;
 }
 
-button:enabled:hover {
+.submitButton:enabled:hover {
   background-color: #0056b3;
 }
 
-#registerLink {
-  color: #007bff;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
 
-#registerLink:hover {
-  color: #0056b3;
-}
+
+
 
