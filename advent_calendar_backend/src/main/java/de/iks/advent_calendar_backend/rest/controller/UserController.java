@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -24,6 +25,12 @@ public class UserController {
 	public ResponseEntity<User> getUserById(@PathVariable Long id) {
 		User user = userService.getUserById(id);
 		return ResponseEntity.ok(user);
+	}
+
+	@GetMapping("/find")
+	public ResponseEntity<Boolean> findByUsername(@RequestParam String username) {
+		Optional<User> user = userService.findByUsername(username);
+		return ResponseEntity.ok(user.isPresent());
 	}
 
 	@PostMapping

@@ -16,8 +16,6 @@ import java.util.Optional;
 public class UserService {
 
 	private final UserRepo userRepo;
-//	private final PasswordEncoder passwordEncoder;
-
 	public List<User> getAllUsers() {
 		return userRepo.findAll();
 	}
