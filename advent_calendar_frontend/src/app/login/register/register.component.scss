@@ -27,7 +27,7 @@ input {
   border-radius: 4px;
 }
 
-button.btn-enabled {
+button:enabled {
   padding: 10px;
   background-color: #007bff;
   color: #fff;
@@ -36,7 +36,7 @@ button.btn-enabled {
   cursor: pointer;
 }
 
-button.btn-disabled {
+button:disabled {
   padding: 10px;
   background-color: #b2b2b2;
   color: #000000;
@@ -45,13 +45,8 @@ button.btn-disabled {
   cursor: not-allowed;
 }
 
-button.btn-enabled:hover {
+button:enabled:hover {
   background-color: #0056b3;
-}
-
-#errorText {
-  color: #ff0000;
-  margin-top: 5px;
 }
 
 #registerLink {

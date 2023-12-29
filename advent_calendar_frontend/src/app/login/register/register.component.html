@@ -1,17 +1,17 @@
 <div class="register-container">
   <h2>Signup</h2>
-  <form (submit)="onRegister()">
-    <label for="username">Username</label>
-    <input type="text" id="username" [(ngModel)]="username" name="username" required autocomplete="new-username">
+  <form [formGroup]="signupForm" (ngSubmit)="onRegister()">
+    <label for="createUsername">Username</label>
+    <input type="text" id="createUsername" formControlName="createUsername">
 
-    <label for="password">Create password</label>
-    <input type="password" id="password" [(ngModel)]="password" name="password" required autocomplete="new-password">
+    <label for="createPassword">Create password</label>
+    <input type="password" id="createPassword" formControlName="createPassword">
 
-    <label for="passwordConfirm">Confirm password</label>
-    <input type="password" id="passwordConfirm" [(ngModel)]="passwordConfirm" name="password" required>
+    <label for="confirmPassword">Confirm password</label>
+    <input type="password" id="confirmPassword" formControlName="confirmPassword">
 
-    <button type="submit" id="loginButton"
-            [ngClass]="{ 'btn-enabled': username && password, 'btn-disabled': !username || !password }">Signup
+    <button type="submit" id="registerButton"
+            [disabled]="signupForm.invalid">Signup
     </button>
   </form>
   <a id="registerLink" (click)="onNavigateToLogin()">Already have an account?  Login</a>
