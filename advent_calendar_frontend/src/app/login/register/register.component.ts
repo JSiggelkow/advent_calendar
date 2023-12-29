@@ -2,6 +2,9 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
+import {
+  ConfirmPasswordMatchesCreatePasswordValidator
+} from "../../services/directives/validation/confirm-password-matches-create-password.directive";
 
 @Component({
   selector: 'app-register',
@@ -27,7 +30,7 @@ export class RegisterComponent {
       Validators.minLength(4)
     ]),
     confirmPassword: new FormControl('', Validators.required)
-  })
+  }, {validators: ConfirmPasswordMatchesCreatePasswordValidator})
 
   onRegister() {
     console.log("register")
