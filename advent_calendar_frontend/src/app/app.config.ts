@@ -4,7 +4,6 @@ import {provideRouter, withComponentInputBinding} from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
-import {JwtInterceptor} from "./services/http/jwt-interceptor.service";
 import {HttpErrorInterceptorService} from "./services/interceptors/HttpErrorInterceptor.service";
 
 export const appConfig: ApplicationConfig = {
@@ -13,11 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptorsFromDi(),
     ),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptorService,
