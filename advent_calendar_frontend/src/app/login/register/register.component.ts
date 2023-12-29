@@ -2,14 +2,12 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
-import {
-  ConfirmPasswordMatchesCreatePasswordValidator
-} from "../../services/directives/validation/confirm-password-matches-create-password.directive";
 import {UniqueUsernameValidator} from "../../services/directives/validation/UniqueUsernameValidator";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
+import {SignUpValidationService} from "../../services/directives/validation/sign-up-validation.service";
 
 @Component({
   selector: 'app-register',
@@ -31,7 +29,8 @@ import {MatButtonModule} from "@angular/material/button";
 export class RegisterComponent {
 
   router = inject(Router);
-  usernameValidator = inject(UniqueUsernameValidator)
+  customValidation = inject(SignUpValidationService);
+  usernameValidator = inject(UniqueUsernameValidator);
   hide = true;
   constructor() {}
 
@@ -41,16 +40,22 @@ export class RegisterComponent {
     updateOn: 'blur',
   });
 
-  createPassword = new FormControl('', [
-    Validators.required,
-    Validators.minLength(4)
-  ]);
+  createPassword = new FormControl('', {
+    validators: [
+      Validators.required,
+      Validators.minLength(4),
+    ],
+    updateOn: "change"
+  });
 
-  confirmPassword = new FormControl('', [
-    Validators.required,
-    Validators.minLength(4),
-    ConfirmPasswordMatchesCreatePasswordValidator(this.createPassword)
-  ]);
+  confirmPassword = new FormControl('', {
+    validators: [
+      Validators.required,
+      Validators.minLength(4),
+      this.customValidation.ConfirmPasswordMatchesCreatePasswordValidator(this.createPassword)
+    ],
+    updateOn: "change"
+  });
 
   signupForm = new FormGroup({
     createUsername: this.createUsername,
@@ -59,6 +64,9 @@ export class RegisterComponent {
   });
 
   onRegister() {
+    if (this.signupForm.invalid) {
+      return
+    }
     console.log("register")
   }
 
