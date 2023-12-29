@@ -33,5 +33,10 @@
     <button class="submitButton" type="submit" id="registerButton"
             [disabled]="signupForm.invalid">Signup
     </button>
+    <div id="lineBrake"></div>
+    <div (click)="onNavigateToLogin()">
+      <span class="toLogin">Already have an account?</span>
+      <span id="toLoginLogin"> Login</span>
+    </div>
   </form>
 </div>
