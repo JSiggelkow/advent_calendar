@@ -2,13 +2,13 @@
   <h2>Signup</h2>
   <form [formGroup]="signupForm" (ngSubmit)="onRegister()">
     <label for="createUsername">Username</label>
-    <input type="text" id="createUsername" formControlName="createUsername">
+    <input type="text" id="createUsername" formControlName="createUsername" autocomplete="new-Username">
 
     <label for="createPassword">Create password</label>
-    <input type="password" id="createPassword" formControlName="createPassword">
+    <input type="password" id="createPassword" formControlName="createPassword" autocomplete="new-Password">
 
     <label for="confirmPassword">Confirm password</label>
-    <input type="password" id="confirmPassword" formControlName="confirmPassword">
+    <input type="password" id="confirmPassword" formControlName="confirmPassword" autocomplete="new-Password">
 
     <button type="submit" id="registerButton"
             [disabled]="signupForm.invalid">Signup
