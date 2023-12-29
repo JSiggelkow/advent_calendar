@@ -13,8 +13,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 export class RegisterComponent {
 
   registerForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(8)]],
-    password: ['', [Validators.required, Validators.minLength(8)]]
+    username: ['', [Validators.required, Validators.minLength(1)]],
+    password: ['', [Validators.required, Validators.minLength(1)]]
   });
 
   constructor(private fb: FormBuilder) {}
