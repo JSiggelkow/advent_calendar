@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {LoginService} from "./entities/Login.service";
+import {LoginService} from "./Login.service";
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,6 @@ export class AuthService {
   }
 
   register(credentials: {username: string; password: string}) {
-
+    console.log(credentials.username + " | " + credentials.password);
   }
 }

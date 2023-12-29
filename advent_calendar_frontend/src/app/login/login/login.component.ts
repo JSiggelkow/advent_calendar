@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/entities/auth.service";
 import {Router} from "@angular/router";
 import {ErrorHandlingService} from "../../services/http/errorHandling.service";
 

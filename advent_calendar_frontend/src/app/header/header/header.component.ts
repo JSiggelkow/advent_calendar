@@ -1,6 +1,6 @@
-import {Component, OnChanges, SimpleChanges} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../services/entities/auth.service";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 
 @Component({
