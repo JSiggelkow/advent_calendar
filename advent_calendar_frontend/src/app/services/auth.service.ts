@@ -29,7 +29,6 @@ export class AuthService {
     });
   }
 
-
   logout() {
     this.http.post(this.apiUrlLogout, null, {withCredentials: true}).subscribe(
       () => {
@@ -37,5 +36,9 @@ export class AuthService {
         this.isLoggedInSubject.next(false);
       }
     );
+  }
+
+  register(credentials: {username: string; password: string}) {
+
   }
 }

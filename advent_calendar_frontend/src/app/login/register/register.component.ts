@@ -1,24 +1,36 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {Component, inject} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgClass, NgIf} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgIf,
+    NgClass
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 
-  registerForm: FormGroup = this.fb.group({
-    username: ['', [Validators.required, Validators.minLength(1)]],
-    password: ['', [Validators.required, Validators.minLength(1)]]
-  });
+  router = inject(Router);
 
-  constructor(private fb: FormBuilder) {}
+  username: string = '';
+  password: string = '';
+  passwordConfirm: string = '';
 
-  onSubmit(): void {
+  constructor() {}
+
+  onRegister() {
+
   }
+
+  onNavigateToLogin() {
+    this.router.navigate(["login"]).then();
+  }
+
 }

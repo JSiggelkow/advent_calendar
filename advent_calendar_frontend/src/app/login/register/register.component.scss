@@ -5,26 +5,10 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
+h2 {
   text-align: center;
-}
-
-.form {
-  width: 300px;
-  margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
 }
 
 form {
@@ -43,7 +27,7 @@ input {
   border-radius: 4px;
 }
 
-button:enabled {
+button.btn-enabled {
   padding: 10px;
   background-color: #007bff;
   color: #fff;
@@ -52,7 +36,7 @@ button:enabled {
   cursor: pointer;
 }
 
-button:disabled {
+button.btn-disabled {
   padding: 10px;
   background-color: #b2b2b2;
   color: #000000;
@@ -61,6 +45,23 @@ button:disabled {
   cursor: not-allowed;
 }
 
-button:hover {
+button.btn-enabled:hover {
   background-color: #0056b3;
 }
+
+#errorText {
+  color: #ff0000;
+  margin-top: 5px;
+}
+
+#registerLink {
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#registerLink:hover {
+  color: #0056b3;
+}
+

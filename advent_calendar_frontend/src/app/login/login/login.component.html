@@ -1,10 +1,10 @@
 <div class="login-container">
   <h2>Login</h2>
   <form (submit)="onLogin()">
-    <label for="username">Benutzername:</label>
+    <label for="username">Username</label>
     <input type="text" id="username" [(ngModel)]="username" name="username" required>
 
-    <label for="password">Passwort:</label>
+    <label for="password">Password</label>
     <input type="password" id="password" [(ngModel)]="password" name="password" required>
 
     <button type="submit" id="loginButton"
@@ -12,5 +12,5 @@
     </button>
     <p *ngIf="loginError" id="errorText">Wrong Username/Password</p>
   </form>
-  <a id="registerLink" (click)="onNavigateToRegister()">Noch nicht registriert? Registrieren</a>
+  <a id="registerLink" (click)="onNavigateToRegister()">Don't have an account? Signup</a>
 </div>
