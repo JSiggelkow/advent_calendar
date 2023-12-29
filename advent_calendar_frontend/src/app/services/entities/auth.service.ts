@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {LoginService} from "./Login.service";
+import {GenericCrudService} from "../http/GenericCrud.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,9 @@ export class AuthService {
   private apiUrlLogout: string = "http://localhost:8080/api/auth/logout";
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  private apiUrlFindUsername: string = "http://localhost:8080/api/users/find";
 
-  constructor(private http: HttpClient, private loginService: LoginService) {
+  constructor(private http: HttpClient, private loginService: LoginService, private genericCrud: GenericCrudService<boolean>) {
   }
 
   login(credentials: { username: string; password: string }) {
@@ -40,5 +42,9 @@ export class AuthService {
 
   register(credentials: {username: string; password: string}) {
     console.log(credentials.username + " | " + credentials.password);
+  }
+
+  checkUsername(username: string) {
+    return this.genericCrud.getByStringViaParam(this.apiUrlFindUsername,"username",username);
   }
 }

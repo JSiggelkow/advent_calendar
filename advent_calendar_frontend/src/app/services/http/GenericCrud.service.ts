@@ -16,6 +16,10 @@ export class GenericCrudService<T> {
     return this.http.get<T>(`${apiUrl}/${id}`, {withCredentials: true});
   }
 
+  getByStringViaParam(apiUrl: string, param: string, value: string): Observable<T> {
+    return this.http.get<T>(`${apiUrl}?${param}=${value}`, {withCredentials: true})
+  }
+
   create(apiUrl: string, entity: T): Observable<T> {
     return this.http.post<T>(apiUrl, entity, {withCredentials: true});
   }

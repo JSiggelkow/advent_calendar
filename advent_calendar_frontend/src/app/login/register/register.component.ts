@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {
   ConfirmPasswordMatchesCreatePasswordValidator
 } from "../../services/directives/validation/confirm-password-matches-create-password.directive";
+import {UniqueUsernameValidator} from "../../services/directives/validation/UniqueUsernameValidator";
 
 @Component({
   selector: 'app-register',
@@ -21,10 +22,16 @@ import {
 export class RegisterComponent {
 
   router = inject(Router);
+  usernameValidator = inject(UniqueUsernameValidator)
   constructor() {}
 
   signupForm = new FormGroup({
-    createUsername: new FormControl('', Validators.required),
+    createUsername: new FormControl('', {
+      asyncValidators: [
+        this.usernameValidator.validate.bind(this.usernameValidator),
+      ],
+      updateOn: 'blur',
+    }),
     createPassword: new FormControl('', [
       Validators.required,
       Validators.minLength(4)
