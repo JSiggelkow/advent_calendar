@@ -2,7 +2,6 @@ import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
 import {Router} from "@angular/router";
-import {UniqueUsernameValidator} from "../../services/directives/validation/UniqueUsernameValidator";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -30,13 +29,12 @@ export class RegisterComponent {
 
   router = inject(Router);
   customValidation = inject(SignUpValidationService);
-  usernameValidator = inject(UniqueUsernameValidator);
   hide = true;
   constructor() {}
 
   createUsername = new FormControl('', {
     validators: [Validators.required],
-    asyncValidators: [this.usernameValidator.validate.bind(this.usernameValidator)],
+    asyncValidators: [this.customValidation.UniqueUsernameValidator().bind(this.customValidation.UniqueUsernameValidator)],
     updateOn: 'blur',
   });
 
