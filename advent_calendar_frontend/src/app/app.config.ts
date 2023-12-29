@@ -9,13 +9,10 @@ import {HttpErrorInterceptorService} from "./services/interceptors/HttpErrorInte
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
-    provideHttpClient(
-      withInterceptorsFromDi(),
-    ),
+    provideHttpClient(withInterceptorsFromDi()),
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptorService,
-      multi: true,
-    }
-  ]
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpErrorInterceptorService,
+        multi: true,
+    }, provideAnimations()]
 };
