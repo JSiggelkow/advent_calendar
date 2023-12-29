@@ -10,7 +10,7 @@ export class UniqueUsernameValidator implements AsyncValidator {
   constructor(private auth: AuthService) {}
 
   validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-    if (!control.touched || !control.value) {
+    if (!control.value) {
       return of(null);
     }
 
