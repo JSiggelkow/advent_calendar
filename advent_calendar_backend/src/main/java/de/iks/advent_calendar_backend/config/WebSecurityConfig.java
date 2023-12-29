@@ -45,10 +45,11 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests(registry -> registry
 						.requestMatchers("/api/auth/login").permitAll()
 						.requestMatchers("/api/auth/logout").permitAll()
-						.requestMatchers(HttpMethod.POST,"/api/**").hasRole("ADMIN")
-						.requestMatchers(HttpMethod.GET,"/api/**").hasAnyRole("CONSUMER","ADMIN")
-						.requestMatchers(HttpMethod.PUT,"/api/**").hasRole("ADMIN")
-						.requestMatchers(HttpMethod.DELETE,"/api/**").hasRole("ADMIN")
+						.requestMatchers("/api/users/find").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.GET, "/api/**").hasAnyRole("CONSUMER", "ADMIN")
+						.requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
 						.anyRequest().authenticated()
 				);
 
@@ -94,7 +95,7 @@ public class WebSecurityConfig {
 								HttpMethod.PUT.name(),
 								HttpMethod.POST.name(),
 								HttpMethod.DELETE.name()
-								)
+						)
 						.allowedHeaders(
 								HttpHeaders.CONTENT_TYPE,
 								HttpHeaders.AUTHORIZATION
