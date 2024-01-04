@@ -7,6 +7,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {SignUpValidationService} from "../../services/directives/validation/sign-up-validation.service";
+import {AuthService} from "../../services/entities/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -28,9 +29,12 @@ import {SignUpValidationService} from "../../services/directives/validation/sign
 export class RegisterComponent {
 
   router = inject(Router);
+  auth = inject(AuthService);
   customValidation = inject(SignUpValidationService);
   hide = true;
-  constructor() {}
+
+  constructor() {
+  }
 
   createUsername = new FormControl('', {
     validators: [Validators.required],
@@ -60,11 +64,15 @@ export class RegisterComponent {
     confirmPassword: this.confirmPassword
   }, {validators: this.customValidation.confirmPasswordMatchesCreatePassword});
 
-  onRegister() {
+  onSignUp() {
     if (this.signupForm.invalid) {
       return
     }
-    console.log("register")
+    if (this.createUsername.value && this.createPassword.value) {
+      this.auth.signUp({username: this.createUsername.value, password: this.createPassword.value});
+    } else {
+      return;
+    }
   }
 
   onNavigateToLogin() {

@@ -3,6 +3,7 @@ import {BehaviorSubject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {LoginService} from "./Login.service";
 import {GenericCrudService} from "../http/GenericCrud.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,10 @@ export class AuthService {
 
   private apiUrlLogin: string = "http://localhost:8080/api/auth/login";
   private apiUrlLogout: string = "http://localhost:8080/api/auth/logout";
+  private apiUrlFindUsername: string = "http://localhost:8080/api/users/find";
+  private apiUrlSignUp: string = "http://localhost:8080/api/users";
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  private apiUrlFindUsername: string = "http://localhost:8080/api/users/find";
 
   constructor(private http: HttpClient, private loginService: LoginService, private genericCrud: GenericCrudService<boolean>) {
   }
@@ -40,8 +42,16 @@ export class AuthService {
     );
   }
 
-  register(credentials: {username: string; password: string}) {
-    console.log(credentials.username + " | " + credentials.password);
+  signUp(credentials: {username: string; password: string}) {
+    this.http.post(this.apiUrlSignUp, credentials).subscribe({
+      next: () => {
+        console.log("signup erfolgreich");
+      },
+      error: () => {
+        console.log("error")
+      }
+      }
+    )
   }
 
   checkUsername(username: string) {
