@@ -2,6 +2,7 @@ package de.iks.advent_calendar_backend.rest.controller;
 
 import de.iks.advent_calendar_backend.entity.User;
 import de.iks.advent_calendar_backend.rest.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +35,8 @@ public class UserController {
 	}
 
 	@PostMapping
-	public ResponseEntity<User> createUser(@RequestBody User user) {
-		User createdUser = userService.createUser(user);
+	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+		userService.createUser(user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
