@@ -50,7 +50,6 @@ export class RegisterComponent {
     validators: [
       Validators.required,
       Validators.minLength(4),
-      this.customValidation.ConfirmPasswordMatchesCreatePasswordValidator(this.createPassword)
     ],
     updateOn: "change"
   });
@@ -59,7 +58,7 @@ export class RegisterComponent {
     createUsername: this.createUsername,
     createPassword: this.createPassword,
     confirmPassword: this.confirmPassword
-  });
+  }, {validators: this.customValidation.confirmPasswordMatchesCreatePassword});
 
   onRegister() {
     if (this.signupForm.invalid) {
@@ -79,7 +78,7 @@ export class RegisterComponent {
       return "You must enter a value"
     } else if (formControl.hasError("minlength")) {
       return "Password is to short"
-    } else if (formControl.hasError("noPasswordMatch")) {
+    } else if (this.signupForm.hasError("passwordsNotMatch")) {
       return "Passwords do not match"
     }
     return "An error occurred"

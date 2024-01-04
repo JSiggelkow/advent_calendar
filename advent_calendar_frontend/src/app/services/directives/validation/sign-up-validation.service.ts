@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, ValidationErrors, ValidatorFn, AsyncValidator } from "@angular/forms";
+import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { AuthService } from "../../entities/auth.service";
 import { catchError, map, Observable, of } from "rxjs";
 
@@ -10,11 +10,13 @@ export class SignUpValidationService {
 
   constructor(private auth: AuthService) { }
 
-  ConfirmPasswordMatchesCreatePasswordValidator(createdPasswordControl: FormControl): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      let isTheSame = createdPasswordControl.value != control.value;
-      return isTheSame ? { noPasswordMatch: true } : null;
-    }
+  confirmPasswordMatchesCreatePassword: ValidatorFn = (
+    control: AbstractControl,
+  ): ValidationErrors | null => {
+    const createdPassword = control.get('createPassword');
+    const confirmedPassword = control.get('confirmPassword');
+
+    return createdPassword && confirmedPassword && createdPassword.value != confirmedPassword.value ? {passwordsNotMatch: true} : null;
   }
 
   UniqueUsernameValidator(): (control: AbstractControl) => (Promise<ValidationErrors | null> | Observable<ValidationErrors | null>) {

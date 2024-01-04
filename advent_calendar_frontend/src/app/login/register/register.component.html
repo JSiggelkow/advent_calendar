@@ -27,12 +27,15 @@
         <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       @if (confirmPassword.invalid) {
-        <mat-error>{{ getErrorMessage(confirmPassword) }}</mat-error>
+        <mat-error>{{ getErrorMessage(confirmPassword) }} </mat-error>
       }
     </mat-form-field>
     <button class="submitButton" type="submit" id="registerButton"
             [disabled]="signupForm.invalid">Signup
     </button>
+    @if (signupForm.hasError('passwordsNotMatch') && confirmPassword.valid && createPassword.valid) {
+      <mat-error>Passwords do not match</mat-error>
+    }
     <div id="lineBrake"></div>
     <div (click)="onNavigateToLogin()">
       <span class="toLogin">Already have an account?</span>
