@@ -37,7 +37,11 @@ export class RegisterComponent {
   }
 
   createUsername = new FormControl('', {
-    validators: [Validators.required],
+    validators: [
+      Validators.required,
+      this.customValidation.customPatternValidator(new RegExp("^\\S+$"), "whitespace"),
+      this.customValidation.customPatternValidator(new RegExp("^[a-zA-Z0-9_]+$"), "onlyLettersNumbersUnderscore")
+    ],
     asyncValidators: [this.customValidation.UniqueUsernameValidator().bind(this.customValidation.UniqueUsernameValidator)],
     updateOn: 'blur',
   });
@@ -46,6 +50,8 @@ export class RegisterComponent {
     validators: [
       Validators.required,
       Validators.minLength(4),
+      this.customValidation.customPatternValidator(new RegExp("^\\S+$"), "whitespace"),
+      this.customValidation.customPatternValidator(new RegExp("^[a-zA-Z0-9!@#$%^&*()_+{}\\[\\]:;<>,.?/~\\\\-]*$"), "forbiddenCharacter")
     ],
     updateOn: "change"
   });
@@ -54,6 +60,8 @@ export class RegisterComponent {
     validators: [
       Validators.required,
       Validators.minLength(4),
+      this.customValidation.customPatternValidator(new RegExp("^\\S+$"), "whitespace"),
+      this.customValidation.customPatternValidator(new RegExp("^[a-zA-Z0-9!@#$%^&*()_+{}\\[\\]:;<>,.?/~\\\\-]*$"), "forbiddenCharacter")
     ],
     updateOn: "change"
   });
@@ -80,15 +88,23 @@ export class RegisterComponent {
   }
 
   getErrorMessage(formControl: FormControl) {
-    if (formControl.hasError("usernameTaken")) {
-      return "Username already exists"
-    } else if (formControl.hasError("required")) {
-      return "You must enter a value"
-    } else if (formControl.hasError("minlength")) {
-      return "Password is to short"
-    } else if (this.signupForm.hasError("passwordsNotMatch")) {
-      return "Passwords do not match"
+    const errorType = formControl.errors ? Object.keys(formControl.errors)[0] : null;
+
+    switch (errorType) {
+      case "usernameTaken":
+        return "Username already exists";
+      case "required":
+        return "You must enter a value";
+      case "minlength":
+        return "Password is too short";
+      case "whitespace":
+        return "Whitespace not allowed";
+      case "onlyLettersNumbersUnderscore":
+        return "Invalid characters"
+      case "forbiddenCharacter":
+        return "Forbidden Character"
+      default:
+        return "An error occurred";
     }
-    return "An error occurred"
   }
 }

@@ -31,5 +31,12 @@ export class SignUpValidationService {
       );
     };
   }
+
+  customPatternValidator(pattern: RegExp, code: string) {
+    return (control: AbstractControl) : { [key:string]: any } | null => {
+      const valid = pattern.test(control.value);
+      return valid ? null : {[code]: true};
+    }
+  }
 }
 
