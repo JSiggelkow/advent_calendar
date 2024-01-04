@@ -1,16 +1,31 @@
 <div class="login-container">
   <h2>Login</h2>
-  <form (submit)="onLogin()">
-    <label for="username">Username</label>
-    <input type="text" id="username" [(ngModel)]="username" name="username" required>
-
-    <label for="password">Password</label>
-    <input type="password" id="password" [(ngModel)]="password" name="password" required>
-
-    <button type="submit" id="loginButton"
-            [ngClass]="{ 'btn-enabled': username && password, 'btn-disabled': !username || !password }">Login
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput type="text" id="usernameForm" [formControl]="usernameControl">
+      @if (usernameControl.invalid) {
+        <mat-error>{{ getErrorMessage(usernameControl) }}</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput id="passwordForm" [type]="hide ? 'password' : 'text'" [formControl]="passwordControl">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide">
+        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      @if (passwordControl.invalid) {
+        <mat-error>{{ getErrorMessage(passwordControl) }}</mat-error>
+      }
+    </mat-form-field>
+    <button class="submitButton" type="submit" id="loginButton"
+            [ngClass]="{'enabled': !loginForm.invalid, 'disabled': loginForm.invalid}">Login
     </button>
-    <p *ngIf="loginError" id="errorText">Wrong Username/Password</p>
+    <div id="lineBrake"></div>
+    <div (click)="onNavigateToRegister()">
+      <span class="toSignUp">Don't have an account?</span>
+      <span id="toSignUpSignUp"> Signup</span>
+    </div>
   </form>
-  <a id="registerLink" (click)="onNavigateToRegister()">Don't have an account? Signup</a>
 </div>
