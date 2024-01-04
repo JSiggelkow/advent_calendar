@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Component, inject} from '@angular/core';
+import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../services/entities/auth.service";
 import {NgIf, NgOptimizedImage} from "@angular/common";
 
@@ -17,6 +17,7 @@ import {NgIf, NgOptimizedImage} from "@angular/common";
 export class HeaderComponent {
 
   isLoggedIn: boolean = false;
+  router = inject(Router);
 
   constructor(private auth: AuthService) {
     this.auth.isLoggedIn$.subscribe(x => {
@@ -30,5 +31,6 @@ export class HeaderComponent {
 
   logout() {
     this.auth.logout();
+    this.router.navigate(["login"]).then();
   }
 }
