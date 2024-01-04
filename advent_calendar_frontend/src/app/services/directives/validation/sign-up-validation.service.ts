@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { AuthService } from "../../entities/auth.service";
 import { catchError, map, Observable, of } from "rxjs";
 
