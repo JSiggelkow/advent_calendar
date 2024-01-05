@@ -42,4 +42,8 @@ public class OpenedDoorsService {
 		openedDoors.setUserId(userId);
 		return openedDoors;
 	}
+
+	public List<Integer> findDoorIdsByUserId(int userId) {
+		return openedDoorsRepo.findDoorIdsByUserId(userId);
+	}
 }

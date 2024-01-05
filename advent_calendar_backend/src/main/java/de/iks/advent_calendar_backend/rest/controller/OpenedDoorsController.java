@@ -56,4 +56,11 @@ public class OpenedDoorsController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@GetMapping("/get-doors")
+	public ResponseEntity<List<Integer>> getDoorsByUserId(HttpServletRequest request) {
+		var userID = jwtUserIssuerService.getUserIdFromJWT(request);
+		var x = openedDoorsService.findDoorIdsByUserId(userID);
+		return new ResponseEntity<>(x, HttpStatus.OK);
+	}
+
 }

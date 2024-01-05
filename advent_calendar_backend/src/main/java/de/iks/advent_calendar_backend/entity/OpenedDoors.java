@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+
 @Entity
 @Table(name = "opened_doors")
 @NoArgsConstructor
@@ -19,7 +22,9 @@ public class OpenedDoors {
 	@Column(name = "user_id")
 	private int userId;
 
-	@Column(name = "door_ids")
-	private int[] doorIds;
+	@ElementCollection
+	@CollectionTable(name = "door_ids", joinColumns = @JoinColumn(name = "opened_doors_id"))
+	@Column(name = "door_id")
+	private List<Integer> doorIds;
 
 }
