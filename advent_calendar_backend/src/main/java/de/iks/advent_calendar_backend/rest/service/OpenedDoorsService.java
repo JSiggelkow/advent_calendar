@@ -5,7 +5,6 @@ import de.iks.advent_calendar_backend.dao.OpenedDoorsRepo;
 import de.iks.advent_calendar_backend.entity.OpenedDoors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -28,5 +27,9 @@ public class OpenedDoorsService {
 
 	public void deleteOpenedDoors(int id) {
 		openedDoorsRepo.deleteById(id);
+	}
+
+	public void addOpenedDoorsForUser(Long userId, List<Integer> newDoors) {
+		openedDoorsRepo.addOpenedDoorsForUser(userId, newDoors);
 	}
 }
