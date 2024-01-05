@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public class UserPrincipal implements UserDetails {
 
-	private final Long userId;
+	private final int userId;
 	private final String username;
 	@JsonIgnore
 	private final String password;

@@ -15,5 +15,7 @@ public interface OpenedDoorsRepo extends JpaRepository<OpenedDoors,Integer> {
 	@Modifying
 	@Query(value = "UPDATE opened_doors SET door_ids = array_append(door_ids, :newDoors) WHERE user_id = :userId", nativeQuery = true)
 	void addOpenedDoorsForUser(@Param("userId") long userId, @Param("newDoors") List<Integer> newDoors);
+
+	boolean existsByUserId(long userId);
 }
 

@@ -10,7 +10,7 @@ import java.util.List;
 public class JwtToPrincipalConverter {
 	public UserPrincipal convert(DecodedJWT jwt) {
 		return UserPrincipal.builder()
-				.userId(Long.valueOf(jwt.getSubject()))
+				.userId(Integer.parseInt(jwt.getSubject()))
 				.username(jwt.getClaim("u").asString())
 				.authorities(extractAuthoritiesFromClaim(jwt))
 				.build();

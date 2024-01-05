@@ -29,7 +29,7 @@ public class AuthService {
 				.map(GrantedAuthority::getAuthority)
 				.toList();
 
-		var token = jwtIssuer.issue(principal.getUserId(), principal.getUsername(), roles);
+		var token = jwtIssuer.issue((long) principal.getUserId(), principal.getUsername(), roles);
 
 		ResponseCookie cookie = ResponseCookie.from("accessToken", token)
 			.httpOnly(true)

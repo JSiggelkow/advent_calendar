@@ -29,7 +29,17 @@ public class OpenedDoorsService {
 		openedDoorsRepo.deleteById(id);
 	}
 
-	public void addOpenedDoorsForUser(Long userId, List<Integer> newDoors) {
+	public void addOpenedDoorsForUser(int userId, List<Integer> newDoors) {
 		openedDoorsRepo.addOpenedDoorsForUser(userId, newDoors);
+	}
+
+	public boolean existsByUserId(int userId) {
+		return openedDoorsRepo.existsByUserId(userId);
+	}
+
+	public OpenedDoors createNewOpenedDoorsByUserId(int userId) {
+		var openedDoors = new OpenedDoors();
+		openedDoors.setUserId(userId);
+		return openedDoors;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -46,7 +47,11 @@ public class OpenedDoorsController {
 
 	@PostMapping("/add-doors")
 	public ResponseEntity<Void> addOpenedDoorsForUser(HttpServletRequest request, @RequestParam("newDoors") List<Integer> newDoors) {
-		var userID =jwtUserIssuerService.test(request);
+		var userID = jwtUserIssuerService.getUserIdFromJWT(request);
+		var isUser = openedDoorsService.existsByUserId(userID);
+		if (!isUser) {
+			openedDoorsService.createOpenedDoors(openedDoorsService.createNewOpenedDoorsByUserId(userID));
+		}
 		openedDoorsService.addOpenedDoorsForUser(userID, newDoors);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

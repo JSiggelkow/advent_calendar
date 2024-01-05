@@ -16,7 +16,7 @@ public class JwtUserIssuerService {
 	private final JwtDecoder jwtDecoder;
 	private final JwtToPrincipalConverter jwtToPrincipalConverter;
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
-	public Long test(HttpServletRequest request) {
+	public int getUserIdFromJWT(HttpServletRequest request) {
 		return jwtAuthenticationFilter.extractTokenFromRequest(request)
 				.map(jwtDecoder::decode)
 				.map(jwtToPrincipalConverter::convert)
