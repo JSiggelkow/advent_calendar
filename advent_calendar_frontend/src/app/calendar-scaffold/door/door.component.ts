@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {state, style, transition, animate, trigger} from '@angular/animations';
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
+import {OpenedDoorsService} from "../../services/entities/opened-doors.service";
 
 @Component({
   selector: 'app-door',
@@ -41,6 +42,7 @@ export class DoorComponent implements OnInit {
   isOpen = false;
   allowedToOpen = false;
   shakeAnimationState = 'start';
+  openedDoors = inject(OpenedDoorsService);
 
   constructor(private router: Router) {
   }
@@ -51,14 +53,15 @@ export class DoorComponent implements OnInit {
     }
   }
   toggle(event: Event) {
-    if (!this.isOpen && this.allowedToOpen) {
+    if (!this.isOpen && this.allowedToOpen && this.doorNumber) {
       this.isOpen = true;
+      this.openedDoors.addDoor(this.doorNumber)
 
       setTimeout(() => {
-        this.router.navigate(['advent-calendar', this.doorNumber]);
+        this.router.navigate(['advent-calendar', this.doorNumber]).then();
       }, 600);
     } else if (this.isOpen && this.allowedToOpen) {
-      this.router.navigate(['advent-calendar', this.doorNumber]);
+      this.router.navigate(['advent-calendar', this.doorNumber]).then();
     } else {
       this.startShake();
     }
