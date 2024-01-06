@@ -39,6 +39,7 @@ import {OpenedDoorsService} from "../../services/entities/opened-doors.service";
 export class DoorComponent implements OnInit {
   @Input() doorNumber: number | undefined;
   @Input() openDoorDate: string | undefined;
+  @Input() getOpenedDoors: number[] | undefined;
   isOpen = false;
   allowedToOpen = false;
   shakeAnimationState = 'start';
@@ -50,6 +51,9 @@ export class DoorComponent implements OnInit {
   ngOnInit(): void {
     if (this.openDoorDate != null) {
       this.allowedToOpen = Date.now() >= new Date(this.openDoorDate).getTime();
+    }
+    if (this.getOpenedDoors && this.doorNumber) {
+      this.isOpen = this.getOpenedDoors.some(openedDoorNumber => openedDoorNumber === this.doorNumber);
     }
   }
   toggle(event: Event) {
